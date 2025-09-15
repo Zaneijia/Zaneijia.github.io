@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>企业拆解文案生成器</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; }
+    textarea, input[type="text"] { width: 100%; padding: 10px; margin: 8px 0; box-sizing: border-box; }
+    label { font-weight: bold; }
+    .section { margin-bottom: 20px; }
+    .output { white-space: pre-wrap; background: #fff; border: 1px solid #ccc; padding: 10px; min-height: 200px; }
+    .error { color: red; font-weight: bold; }
+    .instructions { background: #eef; padding: 10px; border-left: 5px solid #88c; margin-top: 40px; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>企业拆解文案生成器</h1>
+
+  <div class="section">
+    <label>粘贴整行输入（按空格或Tab分隔）：</label>
+    <textarea id="fullInput" rows="8" placeholder="企业拆解 小红书 Day4 - 企业文化 是 已准备 ..."></textarea>
+  </div>
+
+  <button onclick="parseAndGenerate()">生成文案</button>
+
+  <h2>生成结果：</h2>
+  <div class="output" id="result"></div>
+  <div class="error" id="error"></div>
+
+  <div class="instructions">
+  📝 <strong>如何在记事本中修改模版？</strong>
+  
+  1. 用记事本打开本 HTML 文件（右键 → 使用记事本打开）
+  2. 找到这段代码（这是文案模版）👇
+
+  const output = `企业拆解｜「${title}」\n\n👇本期内容要点有：${questions}\n\n———\n\n▼ 阅读方式\n❶ h5：${h5}\n\n❷ Notion：${notion}\n\n${groupQuestion}欢迎在群里畅所欲言~`;
+
+  3. 可自由修改上面的文字结构，例如：
+     - 把 "企业拆解｜" 改成 "本期导读："
+     - 把 Notion 改成 "备份链接"
+     - 或使用 Markdown 风格： `**阅读方式：**\n- H5：[点此阅读](${h5})`
+  4. 保存后双击打开，即可生效
+
+  ✅ 小技巧：可以多复制一份保留原始版本，方便恢复。
+  </div>
+
+  <script>
+    function parseAndGenerate() {
+      const raw = document.getElementById("fullInput").value.trim();
+      const fields = raw.split(/\s+/);
+
+      if (fields.length < 15) {
+        document.getElementById("error").textContent = "❌ 输入字段数量不足，请检查是否缺少必要信息。";
+        document.getElementById("result").textContent = "";
+        return;
+      }
+
+      const title = [fields[1], fields[2], fields[3], fields[4]].join(" ");
+      const h5 = fields[8];
+      const notion = fields[9];
+
+      const questionParts = fields.slice(13, fields.length - 1);
+      let questions = questionParts.join(" ");
+      questions = questions.replace(/(\d️⃣)/g, '\n$1');
+
+      const groupQuestion = fields[fields.length - 1];
+
+      const output = `企业拆解｜「${title}」\n\n👇本期内容要点有：${questions}\n\n———\n\n▼ 阅读方式\n❶ h5：${h5}\n\n❷ Notion：${notion}\n\n${groupQuestion}欢迎在群里畅所欲言~`;
+
+      document.getElementById("result").textContent = output;
+      document.getElementById("error").textContent = "";
+    }
+  </script>
+</body>
+</html>
