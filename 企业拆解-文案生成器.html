@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>文案生成器</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      background-color: #f9f9f9;
+    }
+    h2 {
+      color: #333;
+    }
+    label {
+      font-weight: bold;
+      margin-top: 1rem;
+      display: block;
+    }
+    textarea, input {
+      width: 100%;
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      font-size: 1rem;
+    }
+    button {
+      padding: 0.7rem 1.5rem;
+      font-size: 1rem;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #output {
+      background-color: #fff;
+      padding: 1rem;
+      margin-top: 2rem;
+      border: 1px solid #ccc;
+      white-space: pre-wrap;
+    }
+    .note {
+      margin-top: 3rem;
+      background-color: #eef7ff;
+      padding: 1rem;
+      border-left: 5px solid #2196F3;
+    }
+    code {
+      background-color: #eaeaea;
+      padding: 0 4px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <h2>文案模版生成器</h2>
+
+  <label for="rawInput">输入数据（用 TAB 或空格分隔每列）：</label>
+  <textarea id="rawInput" rows="6" placeholder="文章推荐	效率是敌人	否	已准备	认知与思维方式	Farnam Street	3572	14	⛰️每周精选	https://fs.blog/slack/	https://shesees.szlikeyou.com/article/2613b4cc-c541-8137-a593-d001171decf8	https://www.notion.so/2613b4ccc5418137a593d001171decf8		第五周		第二版		2025/09/19	周四"></textarea>
+
+  <button onclick="generateOutput()">生成文案</button>
+
+  <div id="output"></div>
+
+  <div class="note">
+    <h3>🛠 使用说明与可定制性</h3>
+    <ul>
+      <li>本网页支持<strong>粘贴每一行文章数据</strong>，字段间可使用 <code>TAB</code> 或多个空格分隔。</li>
+      <li>输出模版位于 <code>&lt;script&gt;</code> 中的 <code>result = ...</code> 部分，可自行修改为你常用的格式。</li>
+      <li>如需更换字段名称（如“Notion”换为“Airtable”），只需修改对应字段标题文字。</li>
+      <li>若希望支持批量输入、模版切换或导出，可拓展此页面逻辑。</li>
+    </ul>
+
+    <h4>📦 如何修改本网页（导出为 .html 后）：</h4>
+    <ol>
+      <li>右键另存为 <code>文案生成器.html</code>，使用浏览器打开即可使用。</li>
+      <li>用文本编辑器打开该文件，搜索 <code>result = `...`</code>。</li>
+      <li><strong>情况1（推荐）：</strong> 保留模板字符串写法（<code>${title}</code> 等），修改排版和文字即可，例如：<br>
+        <code>
+          const result = `《${title}》是关于${topic}的文章，由${author}撰写，来自栏目：${section}`
+        </code>
+      </li>
+      <li>变量写法不能删掉 <code>${...}</code>，但可以调换位置、加前后文字，实现自定义模版。</li>
+      <li>若要改为固定模版（非动态），可将整段 result 内容换成固定文本字符串。</li>
+    </ol>
+    <p>如你需要更复杂的功能（如批量导入、自动编号、日期判断等），可继续告诉我，我会为你拓展。</p>
+  </div>
+
+  <script>
+    function generateOutput() {
+      const input = document.getElementById('rawInput').value.trim();
+      const fields = input.split(/\t|\s{2,}|\s(?=https?:)/g); // 支持TAB或多个空格或URL空格
+
+      if (fields.length < 13) {
+        document.getElementById('output').textContent = '⚠️ 输入数据不完整（至少应包含文章标题、主题、作者、字数、阅读时长、板块、原文、H5、Notion）';
+        return;
+      }
+
+      const [_, title, __, ___, topic, author, wordCount, readTime, section, original, h5, notion] = fields;
+
+      const result = `每日好文推荐｜《${title}》\n\n主题：${topic}\n作者：${author}\n字数：${wordCount}\n阅读时长：${readTime}分钟\n板块：「${section}」\n\n———\n\n▼ 阅读方式\n\n❶ 原文：${original}\n\n❷ H5：${h5} 亦可点击上方文章图片末尾，扫码后跳转至H5对应文章阅读\n\n❸ Notion：${notion}\n\n▼ 当前暂不支持墨水屏阅读，后续会推出`;
+
+      document.getElementById('output').textContent = result;
+    }
+  </script>
+</body>
+</html>
