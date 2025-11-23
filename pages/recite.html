@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>政治理论学习平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        body {
+            background-color: #f5f7fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2d3748;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .section {
+            margin-bottom: 50px;
+        }
+        h2 {
+            color: #2b6cb0;
+            margin-bottom: 25px;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+        }
+        h2::before {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 24px;
+            background-color: #2b6cb0;
+            margin-right: 10px;
+            border-radius: 4px;
+        }
+        .question-list {
+            gap: 20px;
+        }
+        .question-item {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 4px solid #4299e1;
+        }
+        .question-text {
+            font-size: 18px;
+            color: #2d3748;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        .blank {
+            display: inline-block;
+            width: 120px;
+            height: 30px;
+            background-color: #fee2e2;
+            border-bottom: 2px solid #dc2626;
+            margin: 0 5px;
+            vertical-align: middle;
+            position: relative;
+        }
+        .blank.short {
+            width: 60px;
+        }
+        .blank.long {
+            width: 180px;
+        }
+        .show-answer {
+            background-color: #4299e1;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .show-answer:hover {
+            background-color: #3182ce;
+        }
+        .answer {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #e8f4f8;
+            border-radius: 4px;
+            display: none;
+            font-size: 17px;
+            color: #2d3748;
+            line-height: 1.6;
+        }
+        .answer.show {
+            display: block;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            .blank {
+                width: 100px;
+                margin: 5px 0;
+            }
+            .question-text {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>政治理论学习平台</h1>
+
+        <!-- 填空题部分 -->
+        <div class="section">
+            <h2>一、填空题</h2>
+            <div class="question-list">
+                <!-- 填空题1 -->
+                <div class="question-item">
+                    <div class="question-text">
+                        1、我国社会主要矛盾已经转化为人民日益增长的<span class="blank long"></span>和<span class="blank long"></span>之间的矛盾。
+                    </div>
+                    <button class="show-answer" onclick="toggleAnswer(this)">显示答案</button>
+                    <div class="answer">
+                        答案：美好生活需要、不平衡不充分的发展
+                    </div>
+                </div>
+
+                <!-- 填空题2 -->
+                <div class="question-item">
+                    <div class="question-text">
+                        2、党的纪律处分有五种：<span class="blank"></span>、<span class="blank"></span>、<span class="blank"></span>、<span class="blank"></span>、<span class="blank"></span>。
+                    </div>
+                    <button class="show-answer" onclick="toggleAnswer(this)">显示答案</button>
+                    <div class="answer">
+                        答案：警告、严重警告、撤销党内职务、留党察看、开除党籍
+                    </div>
+                </div>
+
+                <!-- 填空题3 -->
+                <div class="question-item">
+                    <div class="question-text">
+                        3、“一个中心、两个基本点”是我国社会主义初级阶段的基本路线。其中“一个中心”是指以<span class="blank"></span>为中心，“两个基本点”是指坚持<span class="blank"></span>，坚持<span class="blank"></span>。
+                    </div>
+                    <button class="show-answer" onclick="toggleAnswer(this)">显示答案</button>
+                    <div class="answer">
+                        答案：经济建设、四项基本原则、改革开放
+                    </div>
+                </div>
+
+                <!-- 填空题4 -->
+                <div class="question-item">
+                    <div class="question-text">
+                        4、三会一课：<span class="blank"></span>、<span class="blank"></span>、<span class="blank"></span>，<span class="blank"></span>。
+                    </div>
+                    <button class="show-answer" onclick="toggleAnswer(this)">显示答案</button>
+                    <div class="answer">
+                        答案：支部党员大会、支部委员会、党小组会、上党课
+                    </div>
+                </div>
+
+                <!-- 填空题5 -->
+                <div class="question-item">
+                    <div class="question-text">
+                        5、两学一做：<span class="blank"></span>、<span class="blank"></span>，做合格党员。
+                    </div>
+                    <button class="show-answer" onclick="toggleAnswer(this)">显示答案</button>
+                    <div class="answer">
+                        答案：学党章党规、学系列讲话
+                    </div>
+                </div>
+
+                <!-- 填空题6 -->
+                <div class="question-item">
+                    <div class="question-text">
+                        6、新发展理念：<span class="blank"></span>、<span class="blank"></span>、<span class="blank"></span>、<span class="blank"></span>、<span class="blank"></span>。
+                    </div>
+                    <button class="show-answer" onclick="toggleAnswer(this)">显示答案</button>
+                    <div class="answer">
+                        答案：创新发展、协调发展、绿色发展、开放发展、共享发展
+                    </div>
+                </div>
+
+                <!-- 填空题7 -->
+                <div class="question-item">
+                    <div class="question-text">
+                        7、党的最高理想和最终目的是：实现<span class="blank"></span>。
+                    </div>
+                    <button class="show-answer" onclick="toggleAnswer(this)">显示答案</button>
+                    <div class="answer">
+                        答案：共产主义
+                    </div>
+                </div>
+
+                <!-- 填空题8 -->
+                <div class="question-item">
+                    <div class="question-text">
+                        8、中国共产党的宗旨是：<span class="blank long"></span>。
+                    </div>
+                    <button class="show-answer" onclick="toggleAnswer(this)">显示答案</button>
+                    <div class="answer">
+                        答案：全心全意为人民服务
+                    </div>
+                </div>
+
+                <!-- 填空题9 -->
+                <div class="question-item">
+                    <div class="question-text">
+                        9、中国共产党是<span class="blank"></span>的先锋队，同时是<span class="blank"></span>和<span class="blank"></span>的先锋队。
+                    </div>
+                    <button class="show-answer" onclick="toggleAnswer(this)">显示答案</button>
+                    <div class="answer">
+                        答案：中国工人阶级、中国人民、中华民族
+                    </div>
+                </div>
+
+                <!-- 填空题10 -->
+                <div class="question-item">
+                    <div class="question-text">
+                        10、<span class="blank"></span>是党执政兴国的第一要务。
+                    </div>
+                    <button class="show-answer" onclick="toggleAnswer(this)">显示答案</button>
+                    <div class="answer">
+                        答案：发展
+                    </div>
+                </div>
+
+                <!-- 填空题11 -->
+                <div class="question-item">
+                    <div class="question-text">
+                        11、增强四个意识：<span class="blank"></span>、<span class="blank"></span>、<span class="blank"></span>、<span class="blank"></span>。
+                    </div>
+                    <button class="show-answer" onclick="toggleAnswer(this)">显示答案</button>
+                    <div class="answer">
+                        答案：政治意识、大局意识、核心意识、看齐意识
+                    </div>
+                </div>
+
+                <!-- 填空题12 -->
+                <div class="question-item">
+                    <div class="question-text">
+                        12、坚定四个自信：<span class="blank"></span>、<span class="blank"></span>、<span class="blank"></span>、<span class="blank"></span>。
+                    </div>
+                    <button class="show-answer" onclick="toggleAnswer(this)">显示答案</button>
+                    <div class="answer">
+                        答案：道路自信、理论自信、制度自信、文化自信
+                    </div>
+                </div>
+
+                <!-- 填空题13 -->
+                <div class="question-item">
+                    <div class="question-text">
+                        13、党章规定，党员如果没有正当理由，连续<span class="blank short"></span>个月不参加党的组织生活，或不缴纳党费，或不做党所分配的工作，就被认为是自行脱党。
+                    </div>
+                    <button class="show-answer" onclick="toggleAnswer(this)">显示答案</button>
+                    <div class="answer">
+                        答案：六
+                    </div>
+                </div>
+
+                <!-- 填空题14 -->
+                <div class="question-item">
+                    <div class="question-text">
+                        14、中国共产党人的初心和使命是：<span class="blank long"></span>、<span class="blank long"></span>。
+                    </div>
+                    <button class="show-answer" onclick="toggleAnswer(this)">显示答案</button>
+                    <div class="answer">
+                        答案：为中国人民谋幸福、为中华民族谋复兴
+                    </div>
+                </div>
+
+                <!-- 填空题15 -->
+                <div class="question-item">
+                    <div class="question-text">
+                        15、中国共产党第十九次全国代表大会一致同意，在党章中把<span class="blank long"></span>同马克思列宁主义、毛泽东思想、邓小平理论、“三个代表”重要思想、科学发展观一道确立为党的行动指南。
+                    </div>
+                    <button class="show-answer" onclick="toggleAnswer(this)">显示答案</button>
+                    <div class="answer">
+                        答案：习近平新时代中国特色社会主义思想
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 简答题部分 -->
+        <div class="section">
+            <h2>二、简答题</h2>
+            <div class="question-list">
+                <!-- 简答题1 -->
+                <div class="question-item">
+                    <div class="question-text">1、社会主义的本质是什么？</div>
+                    <button class="show-answer" onclick="toggleAnswer(this)">显示答案</button>
+                    <div class="answer">
+                        答案：解放生产力，发展生产力，消灭剥削，消除两极分化，最终达到共同富裕。
+                    </div>
+                </div>
+
+                <!-- 简答题2 -->
+                <div class="question-item">
+                    <div class="question-text">2、党的基本路线是什么？</div>
+                    <button class="show-answer" onclick="toggleAnswer(this)">显示答案</button>
+                    <div class="answer">
+                        答案：团结全国各族人民，以经济建设为中心，坚持四项基本原则，坚持改革开放；自力更生，艰苦创业，为把我国建设成为富强、民主、文明的社会主义现代化国家而奋斗。
+                    </div>
+                </div>
+
+                <!-- 简答题3 -->
+                <div class="question-item">
+                    <div class="question-text">3、党的组织原则是什么？四个服从指哪四个服从？</div>
+                    <button class="show-answer" onclick="toggleAnswer(this)">显示答案</button>
+                    <div class="answer">
+                        答案：组织原则是民主集中制；四个服从是指个人服从组织、少数服从多数、下级服从上级、全党服从中央。
+                    </div>
+                </div>
+
+                <!-- 简答题4 -->
+                <div class="question-item">
+                    <div class="question-text">4、中国特色社会主义事业总体布局是什么？战略布局是什么？分别是什么？</div>
+                    <button class="show-answer" onclick="toggleAnswer(this)">显示答案</button>
+                    <div class="answer">
+                        答案：总体布局是“五位一体”；战略布局是“四个全面”。<br>
+                        “五位一体”指：经济建设、政治建设、文化建设、社会建设、生态文明建设；<br>
+                        “四个全面”（“四个全面”战略布局），即全面建设社会主义现代化国家、全面深化改革、全面依法治国、全面从严治党。
+                    </div>
+                </div>
+
+                <!-- 简答题5 -->
+                <div class="question-item">
+                    <div class="question-text">5、党的行动指南是什么？</div>
+                    <button class="show-answer" onclick="toggleAnswer(this)">显示答案</button>
+                    <div class="answer">
+                        答案：中国共产党以马克思列宁主义、毛泽东思想、邓小平理论、“三个代表”重要思想、科学发展观、习近平新时代中国特色社会主义思想作为自己的行动指南。
+                    </div>
+                </div>
+
+                <!-- 简答题6 -->
+                <div class="question-item">
+                    <div class="question-text">6、党的群众路线是什么？</div>
+                    <button class="show-answer" onclick="toggleAnswer(this)">显示答案</button>
+                    <div class="answer">
+                        答案：一切为了群众，一切依靠群众，从群众中来，到群众中去。
+                    </div>
+                </div>
+
+                <!-- 简答题7 -->
+                <div class="question-item">
+                    <div class="question-text">7、党面临的四大考验和四大危险是什么？</div>
+                    <button class="show-answer" onclick="toggleAnswer(this)">显示答案</button>
+                    <div class="answer">
+                        答案：我们党面临着“四大考验”，即执政考验、改革开放考验、市场经济考验、外部环境考验，这些考验是长期的、复杂的、严峻的；<br>
+                        面临着“四大危险”，即精神懈怠的危险、能力不足的危险、脱离群众的危险、消极腐败的危险，这些危险更加尖锐地摆在全党面前。
+                    </div>
+                </div>
+
+                <!-- 简答题8 -->
+                <div class="question-item">
+                    <div class="question-text">8、改革开放以来我们取得一切成绩和进步的根本原因是什么？</div>
+                    <button class="show-answer" onclick="toggleAnswer(this)">显示答案</button>
+                    <div class="answer">
+                        答案：改革开放以来我们取得一切成绩和进步的根本原因，归结起来就是：开辟了中国特色社会主义道路，形成了中国特色社会主义理论体系。高举中国特色社会主义伟大旗帜，最根本的就是要坚持这条道路和这个理论体系。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 答案显示/隐藏切换函数
+        function toggleAnswer(btn) {
+            const answerElem = btn.nextElementSibling;
+            answerElem.classList.toggle('show');
+            btn.textContent = answerElem.classList.contains('show') ? '隐藏答案' : '显示答案';
+        }
+
+        // 可选：添加返回顶部功能
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                const backToTop = document.createElement('button');
+                backToTop.textContent = '返回顶部';
+                backToTop.style.position = 'fixed';
+                backToTop.style.bottom = '30px';
+                backToTop.style.right = '30px';
+                backToTop.style.padding = '8px 16px';
+                backToTop.style.backgroundColor = '#2b6cb0';
+                backToTop.style.color = 'white';
+                backToTop.style.border = 'none';
+                backToTop.style.borderRadius = '4px';
+                backToTop.style.cursor = 'pointer';
+                backToTop.style.zIndex = '999';
+                backToTop.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+                backToTop.id = 'backToTop';
+                if (!document.getElementById('backToTop')) {
+                    document.body.appendChild(backToTop);
+                }
+            } else {
+                const backToTop = document.getElementById('backToTop');
+                if (backToTop) {
+                    document.body.removeChild(backToTop);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
